@@ -18,12 +18,14 @@ document.getElementById('securityForm').addEventListener('submit', function(even
 
     if (ownerAnswer === 'yes') {
         document.getElementById('nameInput').style.display = 'block';
+        document.getElementById('securityForm').removeEventListener('submit', arguments.callee);
+        document.getElementById('securityForm').addEventListener('submit', handleNameSubmit);
     } else {
         document.getElementById('message').textContent = 'Access denied. You must be the owner to proceed.';
     }
 });
 
-document.getElementById('securityForm').addEventListener('submit', function(event) {
+function handleNameSubmit(event) {
     event.preventDefault();
 
     var creatorName = document.getElementById('creatorName').value.trim().toLowerCase();
@@ -36,7 +38,7 @@ document.getElementById('securityForm').addEventListener('submit', function(even
         document.getElementById('creatorName').disabled = true;
         document.querySelector('#nameInput button').disabled = true;
     }
-});
+}
 
 document.getElementById('unlockForm').addEventListener('submit', function(event) {
     event.preventDefault();
