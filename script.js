@@ -1,111 +1,30 @@
-document.getElementById('owner-check-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-    const isOwner = document.getElementById('is-owner').checked;
-    const ownerName = document.getElementById('owner-name').value;
+document.getElementById('securityForm').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-    fetch('/check-owner', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ isOwner, ownerName })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            document.getElementById('owner-check-form').style.display = 'none';
-            document.getElementById('login-form').style.display = 'block';
-        } else {
-            alert('Owner verification failed. Phone is locked.');
-            lockPhone();
-        }
-    });
+    var ownerAnswer = document.querySelector('input[name="owner"]:checked').value;
+
+    if (ownerAnswer === 'yes') {
+        document.getElementById('nameInput').style.display = 'block';
+        document.getElementById('securityForm').style.display = 'none';
+    } else {
+        document.getElementById('message').textContent = 'Access denied. You must be the owner to proceed.';
+    }
 });
 
-document.getElementById('login').addEventListener('submit', function (e) {
-    e.preventDefault();
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+document.getElementById('unlockForm').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-    fetch('/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username, password })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success && data.requires2FA) {
-            document.getElementById('login').style.display = 'none';
-            document.getElementById('2fa-form').style.display = 'block';
-        } else {
-            alert('Login failed');
-        }
-    });
+    var creatorName = document.getElementById('creatorName').value.trim().toLowerCase();
+
+    if (creatorName === 'cyberdrone') {
+        document.getElementById('message').textContent = 'Access granted. Loading...';
+        setTimeout(function() {
+            document.getElementById('unlockForm').style.display = 'none';
+            document.getElementById('phoneContent').style.display = 'block'; // Assuming 'phoneContent' is the id of the content to display
+        }, 2000); // Simulate loading for 2 seconds
+    } else {
+        document.getElementById('message').textContent = 'Incorrect creator name. Phone disabled.';
+        document.getElementById('passcode').disabled = true;
+        document.querySelector('#unlockForm button').disabled = true;
+    }
 });
-
-document.getElementById('submit-2fa').addEventListener('click', function () {
-    const token = document.getElementById('2fa-code').value;
-
-    fetch('/verify-2fa', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ token })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            document.getElementById('2fa-form').style.display = 'none';
-            document.getElementById('tracking-info').style.display = 'block';
-            trackPhone();
-        } else {
-            alert('2FA verification failed');
-        }
-    });
-});
-
-function trackPhone() {
-    fetch('/track')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('location').innerText = `Location: ${data.location}`;
-        });
-
-    document.getElementById('lock-phone').addEventListener('click', function () {
-        fetch('/lock', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Phone locked');
-            } else {
-                alert('Failed to lock phone');
-            }
-        });
-    });
-}
-
-function lockPhone() {
-    // Function to lock the phone
-    fetch('/lock', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Phone locked');
-        } else {
-            alert('Failed to lock phone');
-        }
-    });
-}
