@@ -3,36 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phone Tracker</title>
+    <title>FBI Secret Agent System</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Track and Lock Your Phone</h1>
-    <form id="owner-check-form">
-        <label for="owner-name">Are you the owner of this website?</label>
-        <input type="checkbox" id="is-owner" name="isOwner">
-        <br>
-        <label for="owner-name">Enter the owner's name:</label>
-        <input type="text" id="owner-name" name="ownerName" required>
-        <button type="submit">Proceed</button>
-    </form>
-    <div id="login-form" style="display:none;">
-        <form id="login">
-            <input type="text" id="username" placeholder="Username" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <button type="submit">Login</button>
+    <div class="container">
+        <h1>FBI Secret Agent System</h1>
+        <form id="securityForm">
+            <label for="owner">Are you the owner of this phone and website?</label><br>
+            <label><input type="radio" name="owner" value="yes" required> Yes</label>
+            <label><input type="radio" name="owner" value="no"> No</label><br><br>
+            <div id="nameInput" style="display: none;">
+                <label for="creatorName">What is the name of the creator?</label><br>
+                <input type="text" id="creatorName" name="creatorName"><br><br>
+            </div>
+            <button type="submit">Proceed</button>
         </form>
-        <div id="2fa-form" style="display:none;">
-            <input type="text" id="2fa-code" placeholder="2FA Code" required>
-            <button id="submit-2fa">Submit</button>
+        <form id="unlockForm" style="display: none;">
+            <label for="passcode">Enter passcode:</label><br>
+            <input type="password" id="passcode" name="passcode" autofocus><br><br>
+            <button type="submit">Unlock</button>
+        </form>
+        <div id="phoneContent" style="display: none;">
+            <h2>Welcome to your secured phone!</h2>
+            <!-- Add phone content here -->
         </div>
-        <div id="tracking-info" style="display:none;">
-            <h2>Phone Status</h2>
-            <p id="location"></p>
-            <button id="lock-phone">Lock Phone</button>
-        </div>
+        <p id="message"></p>
     </div>
+
     <script src="script.js"></script>
-    <script src="server.js"></script>
 </body>
 </html>
