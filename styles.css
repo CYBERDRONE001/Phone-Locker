@@ -1,0 +1,84 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #000;
+    color: #00FF00;
+    text-align: center;
+    margin-top: 50px;
+}
+
+h1, h2 {
+    border-bottom: 2px solid #00FF00;
+    padding-bottom: 10px;
+}
+
+form {
+    margin: 20px auto;
+    width: 300px;
+    border: 1px solid #00FF00;
+    padding: 20px;
+    background-color: #001100;
+}
+
+input, button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #000;
+    color: #00FF00;
+    border: 1px solid #00FF00;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #003300;
+}
+
+#tracking-info {
+    margin: 20px auto;
+    width: 300px;
+    border: 1px solid #00FF00;
+    padding: 20px;
+    background-color: #001100;
+}
+
+#owner-check-form, #login-form {
+    margin: 20px auto;
+    width: 300px;
+    border: 1px solid #00FF00;
+    padding: 20px;
+    background-color: #001100;
+}
+
+#owner-check-form label, #login-form label {
+    display: block;
+    margin-bottom: 10px;
+    color: #00FF00;
+}
+
+#owner-name, #username, #password, #2fa-code {
+    width: calc(100% - 22px); /* Adjust for padding */
+    padding: 10px;
+    background-color: #000;
+    color: #00FF00;
+    border: 1px solid #00FF00;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#lock-phone {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #003300;
+    color: #00FF00;
+    border: 1px solid #00FF00;
+    cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#lock-phone:hover {
+    background-color: #006600;
+}
