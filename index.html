@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>FBI Secret Agent System</h1>
+        <h1>Phone Lock By The FBI</h1>
         <form id="securityForm">
             <label for="owner">Are you the owner of this phone and website?</label><br>
             <label><input type="radio" name="owner" value="yes" required> Yes</label>
@@ -16,8 +16,8 @@
             <div id="nameInput" style="display: none;">
                 <label for="creatorName">What is the name of the creator?</label><br>
                 <input type="text" id="creatorName" name="creatorName"><br><br>
+                <button type="submit">Proceed</button>
             </div>
-            <button type="submit">Proceed</button>
         </form>
         <form id="unlockForm" style="display: none;">
             <label for="passcode">Enter passcode:</label><br>
@@ -27,6 +27,14 @@
         <div id="phoneContent" style="display: none;">
             <h2>Welcome to your secured phone!</h2>
             <!-- Add phone content here -->
+        </div>
+        <div id="permissionDialog" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h2>Phone Administration Access</h2>
+                <p>This website requires phone administration access to proceed. Do you grant permission?</p>
+                <button id="grantPermission">Grant</button>
+                <button id="denyPermission">Deny</button>
+            </div>
         </div>
         <p id="message"></p>
     </div>
